@@ -28,15 +28,15 @@ public class Controller extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
             throws ServletException, IOException {
           
-        try (PrintWriter writer = response.getWriter()) {
-            String name = request.getParameter("username");
-            String age = request.getParameter("userage");
-            String gender = request.getParameter("gender");
-            String hobby = request.getParameter("hobby");
-            String[] visited_country = request.getParameterValues("visited_country");
+        try (PrintWriter writer = res.getWriter()) {
+            String name = req.getParameter("username");
+            String age = req.getParameter("userage");
+            String gender = req.getParameter("gender");
+            String hobby = req.getParameter("hobby");
+            String[] visited_country = req.getParameterValues("visited_country");
             
             writer.println("<p>Name: " + name + "</p>");
             writer.println("<p>Age: " + age + "</p>");
@@ -47,4 +47,18 @@ public class Controller extends HttpServlet {
                 writer.println("<li>" + country + "</li>");
         }
     }
+	protected void doPut(HttpServletRequest rq, HttpServletResponse rs) 
+            throws ServletException, IOException {
+		try (PrintWriter writer = rs.getWriter()) {
+			String massage = rq.getParameter("Put");
+			writer.println("Massage: " + massage);
+		}
+	}
+	protected void doDelete(HttpServletRequest quest, HttpServletResponse resp) 
+            throws ServletException, IOException {
+		try (PrintWriter writer = resp.getWriter()) {
+			String massage = quest.getParameter("Delete");
+			writer.println("Answer: " + massage);
+		}
+	}
 }
