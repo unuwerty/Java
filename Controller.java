@@ -11,40 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/hello")
 public class Controller extends HttpServlet {
 	
-	protected void Writers (HttpServletRequest request, HttpServletResponse response, String fname) 
+	private void sendResponse (HttpServletRequest request, String arg, HttpServletResponse response) 
 			throws ServletException, IOException {
 		try (PrintWriter writer = response.getWriter()){
-			fname = request.getParameter("fname");
-			writer.println("nick: " + fname);
+			writer.println(arg);
 	}
 }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {    
-        Writers(request, response, request.getParameter("nick: "));
+		sendResponse(request, "nick: wer", response);
     }
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-          
-        try (PrintWriter writer = response.getWriter()) {
-        	Writers(request, response, request.getParameter("username: "));
-        	Writers(request, response, request.getParameter("userage: "));
-        	Writers(request, response, request.getParameter("gender: "));
-        	Writers(request, response, request.getParameter("hobby: "));
-            String[] visited_country = request.getParameterValues("visited_country");
-            writer.println("country: ");
-            for(String country: visited_country)
-                writer.println(country);
-        }
+        sendResponse(request, "name: ewr \n userage: 345 \n gender: male \n hobby: sport \n Sport: Baseball", response);
+       
     }
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-		Writers(request, response, request.getParameter("answer: "));
+		sendResponse(request, "answer: ew34", response);
 		
 	}
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-		Writers(request, response, request.getParameter("massage: "));
+		sendResponse(request, "question: 23wq?", response);
 		}
 }
